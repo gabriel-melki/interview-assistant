@@ -1,0 +1,32 @@
+{
+  // Enable linting and specify that you want to use pylint.
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+
+  // Optionally specify the full path to the pylint executable if it isn't in your PATH.
+  "python.linting.pylintPath": "${workspaceFolder}/.venv/bin/pylint",
+
+  // Pass additional arguments to pylint.
+  "python.linting.pylintArgs": [
+    // Set the maximum allowed line length.
+    "--max-line-length=100"
+    // Disable specific warnings that you might find overly verbose or unnecessary  
+    ],
+
+  // Editor settings – these can be helpful for code style and consistency.
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+
+  // Save files automatically after a short delay (optional).
+  "files.autoSave": "afterDelay",
+
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.rulers": [100]
+  },
+
+  "black-formatter.args": ["--line-length", "100"]
+}

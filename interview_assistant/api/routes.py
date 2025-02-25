@@ -1,3 +1,7 @@
+"""
+Defining the routes for the API.
+"""
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from interview_assistant.core.schemas import (
@@ -40,4 +44,4 @@ async def generate_tip_stream_endpoint(input_data: TipGenerationRequest):
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e)) from e
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e)) from e 
+        raise HTTPException(status_code=500, detail=str(e)) from e

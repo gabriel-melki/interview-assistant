@@ -1,3 +1,7 @@
+"""
+Defining the Storage class and the QuestionStorage and TipStorage classes.
+"""
+
 import os
 import uuid
 from uuid import UUID
@@ -41,11 +45,17 @@ class BaseStorage(BaseModel):
 
     @property
     def conn(self) -> fakeredis.FakeStrictRedis:
+        """
+        Get the fakeredis connection.
+        """
         if self._conn is None:
             self._conn = fakeredis.FakeStrictRedis(decode_responses=True, encoding="utf-8",)
         return self._conn
 
     def key_exists(self, key: str) -> bool:
+        """
+        Check if a key exists in the fakeredis database.
+        """
         return self.conn.exists(key) == 1
 
 

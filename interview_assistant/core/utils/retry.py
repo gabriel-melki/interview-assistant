@@ -1,3 +1,7 @@
+"""
+Defining the RetryConfig class and the RetryStrategy class.
+"""
+
 from typing import TypeVar, Callable, Optional
 import logging
 from functools import wraps

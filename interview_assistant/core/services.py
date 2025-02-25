@@ -1,3 +1,7 @@
+"""
+Defining the QuestionService and TipService classes.
+"""
+
 from typing import List
 import logging
 from uuid import UUID
@@ -148,6 +152,9 @@ class TipService(BaseModel):
     def generate_tip_wrapper(
         self, generated_question, tip_request, previous_tips_text, stored_embeddings
     ):
+        """
+        Generate a unique tip for the given GeneratedQuestion.
+        """
         @retry(
             max_attempts=self.retry_strategy.max_attempts,
             should_retry=self.retry_strategy.should_retry,
@@ -209,12 +216,15 @@ class TipService(BaseModel):
                 stored_tip = tip_storage.add_tip(tip_request, complete_tip)
                 yield stored_tip
                 return  # Success - exit the retry loop
-                
+
             except Exception as e:
                 attempt += 1
-                if attempt >= self.retry_strategy.max_attempts or not self.retry_strategy.should_retry(e):
+                if (
+                    attempt >= self.retry_strategy.max_attempts
+                    or not self.retry_strategy.should_retry(e)
+                ):
                     raise
-                logger.warning(f"Attempt {attempt} failed, retrying... Error: {str(e)}")
+                logger.warning("Attempt %d failed, retrying... Error: %s", attempt, str(e))
 
 
 class AsyncTipService(BaseModel):
@@ -270,12 +280,15 @@ class AsyncTipService(BaseModel):
                 stored_tip = tip_storage.add_tip(tip_request, complete_tip)
                 yield stored_tip
                 return  # Success - exit the retry loop
-                
+
             except Exception as e:
                 attempt += 1
-                if attempt >= self.retry_strategy.max_attempts or not self.retry_strategy.should_retry(e):
+                if (
+                    attempt >= self.retry_strategy.max_attempts
+                    or not self.retry_strategy.should_retry(e)
+                ):
                     raise
-                logger.warning(f"Attempt {attempt} failed, retrying... Error: {str(e)}")
+                logger.warning("Attempt %d failed, retrying... Error: %s", attempt, str(e))
 
 
 class AsyncQuestionService(BaseModel):
@@ -311,7 +324,7 @@ class AsyncQuestionService(BaseModel):
 
                 # After streaming is complete, validate and store the complete question
                 complete_question = await self.content_generator.get_complete_question()
-                
+
                 if stored_embeddings:
                     candidate_embedding = self.embedder.get_embedding(complete_question.question)
                     if not self.embedder.is_embedding_different_from_list(
@@ -325,6 +338,9 @@ class AsyncQuestionService(BaseModel):
 
             except Exception as e:
                 attempt += 1
-                if attempt >= self.retry_strategy.max_attempts or not self.retry_strategy.should_retry(e):
+                if (
+                    attempt >= self.retry_strategy.max_attempts
+                    or not self.retry_strategy.should_retry(e)
+                ):
                     raise
-                logger.warning(f"Attempt {attempt} failed, retrying... Error: {str(e)}")
+                logger.warning("Attempt %d failed, retrying... Error: %s", attempt, str(e))

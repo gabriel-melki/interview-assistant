@@ -1,3 +1,7 @@
+"""
+Integration tests for the QuestionService and TipService.
+"""
+
 import os
 import uuid
 import pytest

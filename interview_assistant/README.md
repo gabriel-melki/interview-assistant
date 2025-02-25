@@ -1,7 +1,7 @@
-# HR Assistant Services Documentation
+# Interview Assistant Services Documentation
 
 ## Overview
-The HR Assistant provides two main services:
+The Interview Assistant provides two main services:
 1. `QuestionService`: Generates unique interview questions
 2. `TipService`: Generates unique tips for specific questions
 

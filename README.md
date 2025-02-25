@@ -1,6 +1,6 @@
-# HR Assistant API
+# Interview Assistant API
 
-An AI-powered HR Assistant API that generates interview questions and helpful tips for technical roles in data science, engineering, and analytics.
+An AI-powered Interview Assistant API that generates interview questions and helpful tips for technical roles in data science, engineering, and analytics.
 
 ## Features
 
